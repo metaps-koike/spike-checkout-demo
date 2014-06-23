@@ -1,0 +1,8 @@
+{
+  "require": {
+    "curl/curl": "dev-master",
+     "phpunit/phpunit": "4.1.*",
+      "squizlabs/php_codesniffer": "1.*"
+  }
+}
+
