@@ -26,6 +26,12 @@ SPIKE Checkoutデモサイト
   - http://localhost:8000/
 
 
+Webhook の機能を動かす場合は redis が必要です。redis を用意して接続用の環境変数をセットしてください。
+
+```
+% export REDISCLOUD_URL="http://user:password@hostname:port"
+```
+
 
 ソースコード
 ----
@@ -44,6 +50,11 @@ SPIKE Checkoutデモサイト
 - [payment_finish.php](payment_finish.php)
   - REST APIでSPIKEへchargeメソッドを呼び出して課金を行う
   - マーチャントサイトでは決済完了ページに当たる
+- [webhook_endpoint.php](webhook_endpoint.php)
+  - Webhook のURLとして利用可能なエンドポイント
+  - リクエストの内容をkey-valueストアに保存する(保存期間は30分)
+- [webhook_preview.php](webhook_preview.php)
+  - webhook_endpoint.php での保存内容の確認ページ
 
 
 デプロイ
