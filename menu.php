@@ -1,18 +1,19 @@
 <?php
 /**
- * Index page
+ * Menu page
  *
  * @category SPIKE
  * @package  SPIKE
- * @author   Yuki Matsukura <yuki_matsukura@metaps.com>
+ * @author   Noboru Koike <noboru_koike@metaps.com>
  * @license  GPL3  http://opensource.org/licenses/gpl-3.0.html
  * @link     https://github.com/metaps/spike-checkout-demo
  */
+
 ?><!doctype html>
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>SPIKE Checkout demo program</title>
+    <title>SPIKE Checkout demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   </head>
   <body>
@@ -26,26 +27,30 @@ if ($_SERVER['HTTP_X_FORWARDED_PROTO'] != 'https') {
 }
 ?>
 
+<?php
+if (empty($_SESSION['secret_key']) || empty($_SESSION['publishable_key'])) {
+?>
 
-  <form action="save_keys.php" method="post">
+    <a href="index.php">Back to TOP</a>
 
-    <dl>
-      <dt>Secret key</dt>
-      <dd><input type="text" name="secret_key" value="<?php print $_SESSION['secret_key'] ?>" size="50" placeholder="Paste your key"></dd>
-      <dt>Publishable key</dt>
-      <dd><input type="text" name="publishable_key" value="<?php print $_SESSION['publishable_key'] ?>" size="50" placeholder="Paste your key"></dd>
-    </dl>
+<?php
+} else {
+?>
 
-    <input type="submit" value="Show SPIKE Checkout demo">
+    <h3>Checkout</h3>
+    <ul>
+      <li><a href="payment_form.php">Demo program</a></li>
+    </ul>
 
-  </form>
+    <h3>Webhook</h3>
+    <ul>
+      <li><a href="webhook_preview.php">Request preview</a></li>
+    </ul>
 
-  <hr>
-  <footer>
-    version:1.1.0
-  </footer>
+<?php
+}
+?>
+
 
   </body>
 </html>
-
-
