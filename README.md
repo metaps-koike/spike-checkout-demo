@@ -26,10 +26,25 @@ SPIKE Checkoutデモサイト
   - http://localhost:8000/
 
 
-Webhook の機能を動かす場合は redis が必要です。redis を用意して接続用の環境変数をセットしてください。
+Webhook の機能を動かす場合は redis が必要です。  
+redis を用意して接続用の環境変数をセットしてください。
+
+redis のセットアップ。  
+以下は [Homebrew](http://brew.sh/) でのインストール方法です。  
+インストール後、redisサーバを起動してください。
 
 ```
-% export REDISCLOUD_URL="http://user:password@hostname:port"
+% brew install redis
+% redis-server /usr/local/etc/redis.conf
+```
+
+環境変数のセット。  
+spike-checkout-demoディレクトリで環境変数をセットして、ローカルサーバを再起動してください。
+
+```
+% cd spike-checkout-demo
+% export REDISCLOUD_URL="http://:@127.0.0.1:6379"
+% php -S localhost:8000 -c .user.ini
 ```
 
 
