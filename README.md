@@ -56,9 +56,11 @@ spike-checkout-demoディレクトリで環境変数をセットして、ロー�
 
 
 - [index.php](index.php)
- - トップページ
+  - トップページ
 - [save_keys.php](save_keys.php)
   - トップページで入力したキーをプログラム内で利用するためにセッション変数に保存する
+- [menu.php](menu.php)
+  - メニューページ
 - [payment_form.php](payment_form.php)
   - SPIKE Checkoutを呼び出すページ
   - マーチャントサイトでは受注完了ページの直前に当たる
