@@ -29,7 +29,7 @@ SPIKE Checkoutデモサイト
 Webhook の機能を動かす場合は redis が必要です。  
 redis を用意して接続用の環境変数をセットしてください。
 
-redis のセットアップ。  
+##### redis のセットアップ
 以下は [Homebrew](http://brew.sh/) でのインストール方法です。  
 インストール後、redisサーバを起動してください。
 
@@ -38,7 +38,7 @@ redis のセットアップ。
 % redis-server /usr/local/etc/redis.conf
 ```
 
-環境変数のセット。  
+##### 環境変数のセット
 spike-checkout-demoディレクトリで環境変数をセットして、ローカルサーバを再起動してください。
 
 ```
@@ -67,8 +67,10 @@ spike-checkout-demoディレクトリで環境変数をセットして、ロー�
 - [payment_finish.php](payment_finish.php)
   - REST APIでSPIKEへchargeメソッドを呼び出して課金を行う
   - マーチャントサイトでは決済完了ページに当たる
+- [webhook_prepare.php](webhook_prepare.php)
+  - WebhookのURLとして利用可能なエンドポイントを作成する
 - [webhook_endpoint.php](webhook_endpoint.php)
-  - Webhook のURLとして利用可能なエンドポイント
+  - WebhookのURLとして利用可能なエンドポイント
   - リクエストの内容をkey-valueストアに保存する(保存期間は30分)
 - [webhook_preview.php](webhook_preview.php)
   - webhook_endpoint.php での保存内容の確認ページ
