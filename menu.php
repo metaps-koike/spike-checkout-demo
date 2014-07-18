@@ -44,6 +44,7 @@ if (empty($_SESSION['secret_key']) || empty($_SESSION['publishable_key'])) {
 
     <h3>Webhook</h3>
     <ul>
+      <li><a href="webhook_prepare.php">Endpoint prepare</a></li>
       <li><a href="webhook_preview.php">Request preview</a></li>
     </ul>
 
