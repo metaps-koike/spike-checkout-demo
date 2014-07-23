@@ -9,14 +9,14 @@
  * @link     https://github.com/metaps/spike-checkout-demo
  */
 
-$p = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
-if (empty($p)) {
+$query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+if (empty($query)) {
     header('HTTP/1.0 400 Bad Request');
     print 'webhook_demo_key is not specified.';
     exit;
 }
-parse_str($p, $q);
-if (empty($q['webhook_demo_key'])) {
+parse_str($query, $queries);
+if (empty($queries['webhook_demo_key'])) {
     header('HTTP/1.0 400 Bad Request');
     print 'webhook_demo_key is not specified.';
     exit;
@@ -24,38 +24,37 @@ if (empty($q['webhook_demo_key'])) {
 
 
 require 'vendor/autoload.php';
-$r = new Predis\Client(array(
+$redis = new Predis\Client(array(
     'host' => parse_url($_ENV['REDISCLOUD_URL'], PHP_URL_HOST),
     'port' => parse_url($_ENV['REDISCLOUD_URL'], PHP_URL_PORT),
     'password' => parse_url($_ENV['REDISCLOUD_URL'], PHP_URL_PASS),
 ));
-$k = 'webhook:' . $q['webhook_demo_key'];
+$storeKey = 'webhook:' . $queries['webhook_demo_key'];
 
-$v = $r->get($k);
-$d = unserialize($v);
+$value = $redis->get($storeKey);
+$data = unserialize($value);
 
-if (empty($d['secret_key'])) {
+if (empty($data['secret_key'])) {
     header('HTTP/1.0 400 Bad Request');
     print 'webhook prepare is missing.';
     exit;
 }
 
 
-$f = file_get_contents('php://input');
-$j = urldecode($f);
+$json = urldecode(file_get_contents('php://input'));
 
 
 // signature check
-$s = base64_encode(hash_hmac('sha256', json_decode($j), $d['secret_key'], true));
-if ($s != $_SERVER['HTTP_X_SPIKE_WEBHOOKS_SIGNATURE']) {
+$signature = base64_encode(hash_hmac('sha256', json_decode($json), $data['secret_key'], true));
+if ($signature != $_SERVER['HTTP_X_SPIKE_WEBHOOKS_SIGNATURE']) {
     header('HTTP/1.0 400 Bad Request');
     print 'signature is invalid.';
     exit;
 }
 
 
-$d['body'] = $j;
-$r->setex($k, 60 * 30, serialize($d));
+$data['body'] = $json;
+$redis->setex($storeKey, 60 * 30, serialize($data));
 
 
 header('HTTP/1.0 200 OK');
