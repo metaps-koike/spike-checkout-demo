@@ -8,12 +8,16 @@
  * @license  GPL3  http://opensource.org/licenses/gpl-3.0.html
  * @link     https://github.com/metaps/spike-checkout-demo
  */
-?><!doctype html>
-<html lang="ja">
+?><!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="ja">
   <head>
     <meta charset="utf-8">
     <title>SPIKE Checkout demo program</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.3.1/css/normalize.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.3.1/css/foundation.min.css">
+    <script src="//cdn.jsdelivr.net/foundation/5.3.1/js/vendor/modernizr.js"></script>
   </head>
   <body>
 
@@ -27,23 +31,31 @@ if ($_SERVER['HTTP_X_FORWARDED_PROTO'] != 'https') {
 ?>
 
 
-  <form action="save_keys.php" method="post">
+  <div class="row">
+    <form action="save_keys.php" method="post">
 
-    <dl>
-      <dt>Secret key</dt>
-      <dd><input type="text" name="secret_key" value="<?php print $_SESSION['secret_key'] ?>" size="50" placeholder="Paste your key"></dd>
-      <dt>Publishable key</dt>
-      <dd><input type="text" name="publishable_key" value="<?php print $_SESSION['publishable_key'] ?>" size="50" placeholder="Paste your key"></dd>
-    </dl>
+      <dl>
+        <dt>Secret key</dt>
+        <dd><input type="text" name="secret_key" value="<?php print $_SESSION['secret_key'] ?>" size="50" placeholder="Paste your key"></dd>
+        <dt>Publishable key</dt>
+        <dd><input type="text" name="publishable_key" value="<?php print $_SESSION['publishable_key'] ?>" size="50" placeholder="Paste your key"></dd>
+      </dl>
 
-    <input type="submit" value="Show SPIKE Checkout demo">
+      <input type="submit" value="Show SPIKE Checkout demo">
 
-  </form>
+    </form>
+  </div>
 
   <hr>
   <footer>
     version:1.1.0
   </footer>
+
+  <script src="//cdn.jsdelivr.net/foundation/5.3.1/js/vendor/jquery.js"></script>
+  <script src="//cdn.jsdelivr.net/foundation/5.3.1/js/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
 
   </body>
 </html>

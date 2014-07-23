@@ -8,13 +8,16 @@
  * @license  GPL3  http://opensource.org/licenses/gpl-3.0.html
  * @link     https://github.com/metaps/spike-checkout-demo
  */
-
-?><!doctype html>
-<html lang="ja">
+?><!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="ja">
   <head>
     <meta charset="utf-8">
     <title>SPIKE Checkout demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.3.1/css/normalize.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.3.1/css/foundation.min.css">
+    <script src="//cdn.jsdelivr.net/foundation/5.3.1/js/vendor/modernizr.js"></script>
   </head>
   <body>
 
@@ -31,27 +34,31 @@ if ($_SERVER['HTTP_X_FORWARDED_PROTO'] != 'https') {
 if (empty($_SESSION['secret_key']) || empty($_SESSION['publishable_key'])) {
 ?>
 
-    <a href="index.php">Back to TOP</a>
+    <div class="row">
+      <a href="index.php" class="button">Back to TOP</a>
+    </div>
 
 <?php
 } else {
 ?>
 
-    <h3>Checkout</h3>
-    <ul>
-      <li><a href="payment_form.php">Demo program</a></li>
-    </ul>
-
-    <h3>Webhook</h3>
-    <ul>
-      <li><a href="webhook_prepare.php">Endpoint prepare</a></li>
-      <li><a href="webhook_preview.php">Request preview</a></li>
-    </ul>
+    <div class="row">
+      <ul class="button-group">
+        <li><a href="payment_form.php" class="button">Checkout</a></li>
+        <li><a href="webhook_prepare.php" class="button">Webhook</a></li>
+      </ul>
+    </div>
 
 <?php
 }
 ?>
 
+
+  <script src="//cdn.jsdelivr.net/foundation/5.3.1/js/vendor/jquery.js"></script>
+  <script src="//cdn.jsdelivr.net/foundation/5.3.1/js/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
 
   </body>
 </html>
