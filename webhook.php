@@ -1,6 +1,6 @@
 <?php
 /**
- * Webhook prepare
+ * Webhook
  *
  * @category SPIKE
  * @package  SPIKE
