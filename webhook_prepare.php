@@ -18,6 +18,26 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.3.1/css/normalize.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.3.1/css/foundation.min.css">
     <script src="//cdn.jsdelivr.net/foundation/5.3.1/js/vendor/modernizr.js"></script>
+    <style type="text/css">
+      pre {
+        white-space: pre-wrap;
+        white-space: -moz-pre-wrap;
+        white-space: -pre-wrap;
+        white-space: -o-pre-wrap;
+        word-wrap: break-word;
+        margin-bottom: 20px;
+      }
+      pre code {
+        display: block;
+        background: whitesmoke;
+        border: 1px solid #e6e6e6;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        -ms-border-radius: 3px;
+        -o-border-radius: 3px;
+        border-radius: 3px;
+      }
+    </style>
   </head>
   <body>
 
@@ -49,6 +69,8 @@ if (empty($_SESSION['secret_key'])) {
     if (empty($value)) {
         $data = array('secret_key' => $_SESSION['secret_key']);
         $redis->setex($storeKey, 60 * 30, serialize($data));
+    } else {
+        $data = unserialize($value);
     }
 ?>
 
@@ -66,14 +88,26 @@ if (empty($_SESSION['secret_key'])) {
     </div>
 
     <div class="row">
-      <p>Please set your endpoint on SPIKE Developer Dashboard.</p>
-      <a href="https://spike.cc/dashboard/developer/webhook/urls" target="_blank" class="button">SPIKE</a>
+      <p>Please set your endpoint on SPIKE Developer Dashboard.<br>After sending webhook requests, please reload this page.</p>
+      <a href="https://spike.cc/dashboard/developer/webhook/urls" target="_blank" class="button">SPIKE Developer Dashboard</a>
     </div>
 
+    <?php if (!empty($value)) { ?>
     <div class="row">
-      <p>After sending webhook requests, you can preview them.</p>
-      <a href="webhook_preview.php" class="button">Preview</a>
+      <h3>Request Data</h3>
+
+      <?php if (empty($data) || empty($data['body'])) { ?>
+
+        <p>Data is empty.</p>
+
+      <?php } else { ?>
+
+        <pre><code class="language-json"><?php $jsonPretty = new Camspiers\JsonPretty\JsonPretty; echo $jsonPretty->prettify(json_decode($data['body'])); ?></code></pre>
+
+      <?php } ?>
+
     </div>
+    <?php } ?>
 
 <?php
 }
