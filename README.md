@@ -1,11 +1,18 @@
-SPIKE Checkoutデモサイト
+SPIKE Checkoutデモ
 ====
 
 
 オンラインデモ
 ----
-- 以下のURLへアクセスして、ディベロッパーダッシュボードから取得したキーを入力してください。
-  - https://spike-checkout-demo.herokuapp.com/
+オンラインデモではデベロッパー向けに提供しているいくつかの機能を試すことができます。以下のURLへアクセスして、ディベロッパーダッシュボードから取得したサンドボックス用のキーを入力してください。オンラインデモではセキュリティの観点からサンドボックス環境のみの利用としてください。
+
+- https://spike-checkout-demo.herokuapp.com/
+
+#### Checkout
+SPIKE Checkoutでの決済を試すことができます。SPIKE Checkoutのオーバーレイでの入力と、REST APIを使った決済の処理を確認することができます。SPIKE Checkoutについては、[ドキュメント](https://spike.cc/dashboard/developer/docs/getting_started)（要SPIKEログイン）を参照ください。
+
+#### Webhook
+Webhookのリクエスト送信を試すことができます。テスト送信用のエンドポイントURLを提供しますので、そちらを使ってリクエストの受信と内容の確認ができます。Webhookについては、[リファレンス](https://spike.cc/dashboard/developer/docs/references)（要SPIKEログイン）を参照ください。
 
 
 ローカルホストでデモを動かす
@@ -67,13 +74,12 @@ spike-checkout-demoディレクトリで環境変数をセットして、ロー�
 - [payment_finish.php](payment_finish.php)
   - REST APIでSPIKEへchargeメソッドを呼び出して課金を行う
   - マーチャントサイトでは決済完了ページに当たる
-- [webhook_prepare.php](webhook_prepare.php)
-  - WebhookのURLとして利用可能なエンドポイントを作成する
+- [webhook.php](webhook.php)
+  - WebhookのURLとして利用可能なエンドポイントURLを作成する(URLの有効期間は30分)
+  - エンドポイントURLにて受信したリクエストの内容を表示する
 - [webhook_endpoint.php](webhook_endpoint.php)
-  - WebhookのURLとして利用可能なエンドポイント
+  - WebhookのURLとして利用可能なエンドポイントURL
   - リクエストの内容をkey-valueストアに保存する(保存期間は30分)
-- [webhook_preview.php](webhook_preview.php)
-  - webhook_endpoint.php での保存内容の確認ページ
 
 
 デプロイ
