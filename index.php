@@ -41,7 +41,7 @@ if ($_SERVER['HTTP_X_FORWARDED_PROTO'] != 'https') {
         <dd><input type="text" name="publishable_key" value="<?php print $_SESSION['publishable_key'] ?>" size="50" placeholder="Paste your key"></dd>
       </dl>
 
-      <input type="submit" value="Show SPIKE Checkout demo">
+      <input type="submit" value="Show SPIKE Checkout demo" class="button success">
 
     </form>
   </div>
