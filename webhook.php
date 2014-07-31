@@ -13,7 +13,7 @@
 <html class="no-js" lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>SPIKE Checkout demo webhook</title>
+    <title>SPIKE demo webhook</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.3.1/css/normalize.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.3.1/css/foundation.min.css">
@@ -41,7 +41,7 @@
   </head>
   <body>
 
-  <h1>SPIKE Checkout demo webhook</h1>
+  <h1>SPIKE webhook demo</h1>
 
 <?php
 if (empty($_SESSION['secret_key'])) {
@@ -68,7 +68,7 @@ if (empty($_SESSION['secret_key'])) {
     $value = $redis->get($storeKey);
     if (empty($value)) {
         $data = array('secret_key' => $_SESSION['secret_key']);
-        $redis->setex($storeKey, 60 * 30, serialize($data));
+        $redis->setex($storeKey, 60 * 60 * 12, serialize($data));
     } else {
         $data = unserialize($value);
     }
@@ -82,27 +82,31 @@ if (empty($_SESSION['secret_key'])) {
 
     <div class="row">
       <dl>
-        <dt>Your endpoint</dt>
+        <dt>Your endpoint URL</dt>
         <dd><textarea rows="4" onclick="$(this).select()" readonly="readonly"><?php print $url ?></textarea></dd>
       </dl>
     </div>
 
     <div class="row">
-      <p>Please set your endpoint on SPIKE Developer Dashboard.<br>After sending webhook requests, please reload this page.</p>
-      <a href="https://spike.cc/dashboard/developer/webhook/urls" target="_blank" class="button">SPIKE Developer Dashboard</a>
+      <p>Copy the endpoint URL and paste in <a href="https://spike.cc/dashboard/developer/webhook/urls" target="_blank">SPIKE Developer Dashboard's webhook page</a>.<br>After sending webhook requests, please reload this page.</p>
     </div>
 
-    <?php if (!empty($value)) { ?>
+    <?php if ($value) { ?>
     <div class="row">
       <h3>Request Data</h3>
 
       <?php if (empty($data) || empty($data['body'])) { ?>
 
-        <p>Data is empty.</p>
+        <p>Data will be shown here if there is notification to the endpoint.</p>
 
       <?php } else { ?>
 
         <pre><code class="language-json"><?php $jsonPretty = new Camspiers\JsonPretty\JsonPretty; echo $jsonPretty->prettify(json_decode($data['body'])); ?></code></pre>
+
+        <ul>
+          <li>Endpoint URL is valid for 12 hours for security reason.</li>
+          <li>Data will be deleted after 12 hours receiving webhook request.</li>
+        </ul>
 
       <?php } ?>
 

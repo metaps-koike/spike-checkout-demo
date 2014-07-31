@@ -32,8 +32,8 @@ if ($_SERVER['HTTP_X_FORWARDED_PROTO'] != 'https') {
 
 
   <div class="row">
+<p>Copy and paste your <strong>sandbox</strong> keys.</p>
     <form action="save_keys.php" method="post">
-
       <dl>
         <dt>Secret key</dt>
         <dd><input type="text" name="secret_key" value="<?php print $_SESSION['secret_key'] ?>" size="50" placeholder="Paste your key"></dd>
@@ -41,14 +41,16 @@ if ($_SERVER['HTTP_X_FORWARDED_PROTO'] != 'https') {
         <dd><input type="text" name="publishable_key" value="<?php print $_SESSION['publishable_key'] ?>" size="50" placeholder="Paste your key"></dd>
       </dl>
 
-      <input type="submit" value="Show SPIKE Checkout demo" class="button success">
+      <input type="submit" value="Go to SPIKE Checkout demo" class="button">
 
     </form>
   </div>
 
   <hr>
   <footer>
-    version:1.1.0
+    <div class="row">
+      <a href="https://github.com/metaps/spike-checkout-demo" target="_blank">spike-checkout-demo</a> version:1.1.0
+    </div>
   </footer>
 
   <script src="//cdn.jsdelivr.net/foundation/5.3.1/js/vendor/jquery.js"></script>

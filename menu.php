@@ -43,8 +43,8 @@ if (empty($_SESSION['secret_key']) || empty($_SESSION['publishable_key'])) {
 ?>
 
     <div class="row">
-      <ul class="button-group">
-        <li><a href="payment_form.php" class="button">Checkout</a></li>
+      <ul style="list-style: none">
+        <li><a href="payment_form.php" class="button">SPIKE Checkout</a></li>
         <li><a href="webhook.php" class="button">Webhook</a></li>
       </ul>
     </div>
