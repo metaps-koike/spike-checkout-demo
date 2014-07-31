@@ -104,12 +104,8 @@ if (empty($_SESSION['secret_key'])) {
         <pre><code class="language-json"><?php $jsonPretty = new Camspiers\JsonPretty\JsonPretty; echo $jsonPretty->prettify(json_decode($data['body'])); ?></code></pre>
 
         <ul>
-
           <li>Endpoint URL is valid for 12 hours for security reason.</li>
           <li>Data will be deleted after 12 hours receiving webhook request.</li>
-
-          <li>Endpoint URL is valid for 30 minutes for security reason.</li>
-          <li>Data will be deleted after 30 minutes receiving webhook request.</li>
         </ul>
 
       <?php } ?>
