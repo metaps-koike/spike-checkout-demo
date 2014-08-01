@@ -44,6 +44,19 @@ if (empty($data['secret_key'])) {
 $json = urldecode(file_get_contents('php://input'));
 
 
+// function getallheaders
+if (!function_exists('getallheaders')) {
+    function getallheaders() {
+       $headers = '';
+       foreach ($_SERVER as $name => $value) {
+           if (substr($name, 0, 5) == 'HTTP_') {
+               $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+           }
+       }
+       return $headers;
+    }
+}
+
 // signature check
 $signature = base64_encode(hash_hmac('sha256', json_decode($json), $data['secret_key'], true));
 
