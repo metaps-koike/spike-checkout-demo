@@ -26,7 +26,9 @@
   <div class="row">
     <form action="payment_finish.php" method="post">
       <input id="token" type="hidden" name="token" value="">
-      <button id="customButton">Purchase</button>
+      <button name="purchase" data-button-guest="0">Purchase</button>
+      <br>
+      <button name="purchase" data-button-guest="1">Purchase (Guest checkout)</button>
     </form>
   </div>
 
@@ -51,12 +53,14 @@ var handler = SpikeCheckout.configure({
 });
 
 
-$("#customButton").click(function(e) {
+$('button[name="purchase"]').click(function(e) {
+  console.info();
     handler.open({
       name: "My Shop",
       amount: 900,
       currency: "JPY",
-      email: "foo@example.com"
+      email: "foo@example.com",
+      guest: (e.target.dataset.buttonGuest == "0") ? false : true
     });
   e.preventDefault();
 });
