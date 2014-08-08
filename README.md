@@ -18,35 +18,35 @@ Webhookのリクエスト送信を試すことができます。テスト送信�
 ローカルホストでデモを動かす
 ----
 
-自分のMacで動かしてみる場合。
+### Mac OS Xの場合
+
+#### デモプログラムのセットアップ
 
 ```
 % git clone git@github.com:metaps/spike-checkout-demo.git
 % cd spike-checkout-demo
 % curl -sS https://getcomposer.org/installer | php
 % php composer.phar install
-% php -S localhost:8000 -c .user.ini
 ```
 
-
-- ブラウザで以下のURLを開きます
-  - http://localhost:8000/
+#### Redis のセットアップ
 
 
-Webhook の機能を動かす場合は redis が必要です。  
-redis を用意して接続用の環境変数をセットしてください。
+データの一時的な保存のためにRedisを利用しています
 
-##### redis のセットアップ
-以下は [Homebrew](http://brew.sh/) でのインストール方法です。  
-インストール後、redisサーバを起動してください。
+以下は [Homebrew](http://brew.sh/) でRedisをセットアップする方法です。
 
 ```
 % brew install redis
 % redis-server /usr/local/etc/redis.conf
 ```
 
-##### 環境変数のセット
-spike-checkout-demoディレクトリで環境変数をセットして、ローカルサーバを再起動してください。
+
+#### Webサーバの起動
+
+spike-checkout-demoディレクトリに移動し、Redisのサーバ情報を環境変数に設定して、
+Webサーバを起動します。
+
 
 ```
 % cd spike-checkout-demo
@@ -55,12 +55,20 @@ spike-checkout-demoディレクトリで環境変数をセットして、ロー�
 ```
 
 
+
+- ブラウザで以下のURLを開きます
+  - http://localhost:8000/
+
+
+
 ソースコード
 ----
 
 - 以下からダウンロード出来ます。
   - https://github.com/metaps/spike-checkout
 
+
+## ファイルの説明
 
 - [index.php](index.php)
   - トップページ
